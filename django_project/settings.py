@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+from google.oauth2 import service_account
 
 load_dotenv()
 
@@ -43,7 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myblog', # new
+    'storages', # new
 ]
+
+GS_BUCKET_NAME = 'django_img_live'
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    './django-img-live-45bd32604da7.json'
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
